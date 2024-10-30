@@ -41,6 +41,27 @@ Both are used to create variables that shouldn't change, but **const** is more r
 
 # 5. Explain how you implemented the checklist above step-by-step.
 
+
+1. Created a new Flutter application named bonbon_shop.
+
+- Used the flutter create command to set up the project structure.
+
+2. Modified main.dart to change the app title to "Bonbon's Shop" and adjusted the theme colors to shades of orange to match the shop's branding.
+
+3. Created menu.dart in the lib directory to organize the main menu code separately from main.dart for better code management.
+
+4. Moved MyHomePage from main.dart to menu.dart, adjusting it to be a stateless widget since we didn't need to manage any changing state.
+
+5. Declared a variable for the shop name inside MyHomePage to display the shop's name in the app bar.
+
+6. Created a list of buttons by defining the ItemHomepage class and adding instances for "View Product List", "Add Product", and "Logout", each with an icon and a unique color.
+
+7. Created the ItemCard class to display each button as a tappable card. When tapped, it shows a SnackBar with a message specific to the button pressed.
+
+8. Integrated the ItemCard into MyHomePage by updating the build method to display the buttons in a grid layout using GridView.count.
+
+9. Enabled web support by running flutter config --enable-web to ensure the app can run on Chrome.
+
 ## Create a new Flutter application with the E-Commerce theme that matches the previous assignments.
 
 - Open terminal or command prompt.
