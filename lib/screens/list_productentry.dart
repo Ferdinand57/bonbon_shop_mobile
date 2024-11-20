@@ -52,41 +52,89 @@ class _ProductEntryPageState extends State<ProductEntryPage> {
             } else {
               return ListView.builder(
                 itemCount: snapshot.data!.length,
-                itemBuilder: (_, index) => GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductDetailPage(
-                          product: snapshot.data![index],
-                        ),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "${snapshot.data![index].fields.name}",
-                          style: const TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
+                itemBuilder: (_, index) {
+                  var product = snapshot.data![index];
+                  return GestureDetector(
+                    onTap: () {
+                      // Navigate to the product detail page when tapped
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductDetailPage(
+                            product: product,
                           ),
                         ),
-                        const SizedBox(height: 10),
-                        Text("${snapshot.data![index].fields.description}"),
-                        const SizedBox(height: 10),
-                        Text("${snapshot.data![index].fields.price}"),
-                        const SizedBox(height: 10),
-                        Text("${snapshot.data![index].fields.time}"),
-                      ],
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.2),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          // Top orange section for the name
+                          Container(
+                            padding: const EdgeInsets.all(16.0),
+                            decoration: const BoxDecoration(
+                              color: Colors.orange,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(12),
+                                topRight: Radius.circular(12),
+                              ),
+                            ),
+                            child: Text(
+                              "${product.fields.name}",
+                              style: const TextStyle(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          // Bottom orange section for the rest of the information
+                          Container(
+                            padding: const EdgeInsets.all(16.0),
+                            decoration: const BoxDecoration(
+                              color: Colors.orangeAccent,
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(12),
+                                bottomRight: Radius.circular(12),
+                              ),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${product.fields.description}",
+                                  style: const TextStyle(fontSize: 16.0),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  "Price: ${product.fields.price}",
+                                  style: const TextStyle(fontSize: 16.0),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  "Date Added: ${product.fields.time}",
+                                  style: const TextStyle(fontSize: 16.0),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                },
               );
             }
           }
